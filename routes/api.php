@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResource('admin','Admin\Admin');
 Route::apiResource('content','Content\Content');
 Route::apiResource('document','Document\Document');
-Route::apiResource('list','List\List');
+Route::apiResource('list','List\Lista');
 Route::apiResource('review','Review\Review');
 Route::apiResource('statistic','Statistic\Statistic');
 Route::apiResource('tag','Tag\Tag');

@@ -10,7 +10,7 @@ use Validator;
 class Lista extends Controller
 {
     /**
-     * I can't use the normal name List because it gives me error so i just put the italian equivalent. 
+     * I can't use the normal name List because it gives me error so i just put the italian equivalent.
      */
     /**
      * Display a listing of the resource.
