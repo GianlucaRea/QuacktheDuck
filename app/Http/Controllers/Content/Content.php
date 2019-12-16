@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Content;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\ContentModel;
+use Validator;
 
 class Content extends Controller
 {
@@ -14,7 +16,7 @@ class Content extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(ContentModel::get(),200);
     }
 
     /**
@@ -35,7 +37,18 @@ class Content extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $rules = [
+            'type' => 'required',
+            'file' => 'required',
+        ];
+        $validator = Validator::make($request->all(),$rules);
+        if($validator->fails()){
+            return response()->json($validator->errors(),400);
+        }
+
+        $country = ContentModel::create($request->all());
+        return response()->json($country,201);
     }
 
     /**
@@ -46,7 +59,11 @@ class Content extends Controller
      */
     public function show($id)
     {
-        //
+        $content = ContentModel::find($id);
+        if(is_null($content)){
+            return response()->json(["message"=>'Record not found'],404);
+        }
+        return response()->json(ContentModel::find($id),200);
     }
 
     /**
@@ -69,7 +86,12 @@ class Content extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $content = ContentModel::find($id);
+        if(is_null($content)){
+            return response()->json(["message"=>'Record not found'],404);
+        }
+        $content -> update($request -> all());
+        return response()->json($content,200);
     }
 
     /**
@@ -80,6 +102,11 @@ class Content extends Controller
      */
     public function destroy($id)
     {
-        //
+        $content = ContentModel::find($id);
+        if(is_null($content)){
+            return response()->json(["message"=>'Record not found'],404);
+        }
+        $content-> delete();
+        return response()->json(null,204);
     }
 }

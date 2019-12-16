@@ -4,6 +4,8 @@ namespace App\Http\Controllers\List;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\ListModel;
+use Validator;
 
 class List extends Controller
 {
@@ -14,7 +16,7 @@ class List extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(ListModel::get(),200);
     }
 
     /**
@@ -35,7 +37,14 @@ class List extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validator = Validator::make($request->all());
+        if($validator->fails()){
+            return response()->json($validator->errors(),400);
+        }
+
+        $list = ListModel::create($request->all());
+        return response()->json($list,201);
     }
 
     /**
@@ -46,7 +55,11 @@ class List extends Controller
      */
     public function show($id)
     {
-        //
+        $list = ListModel::find($id);
+        if(is_null($list)){
+            return response()->json(["message"=>'Record not found'],404);
+        }
+        return response()->json(ListModel::find($id),200);
     }
 
     /**
@@ -69,7 +82,12 @@ class List extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $list = ListModel::find($id);
+        if(is_null($list)){
+            return response()->json(["message"=>'Record not found'],404);
+        }
+        $list -> update($request -> all());
+        return response()->json($list,200);
     }
 
     /**
@@ -80,6 +98,11 @@ class List extends Controller
      */
     public function destroy($id)
     {
-        //
+        $list = ListModel::find($id);
+        if(is_null($list)){
+            return response()->json(["message"=>'Record not found'],404);
+        }
+        $list-> delete();
+        return response()->json(null,204);
     }
 }

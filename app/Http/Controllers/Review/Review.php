@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Review;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\ReviewModel;
+use Validator;
 
 class Review extends Controller
 {
@@ -14,7 +16,7 @@ class Review extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(ReviewModel::get(),200);
     }
 
     /**
@@ -25,6 +27,7 @@ class Review extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -35,7 +38,13 @@ class Review extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all());
+        if($validator->fails()){
+            return response()->json($validator->errors(),400);
+        }
+
+        $review = ReviewModel::create($request->all());
+        return response()->json($review,201);
     }
 
     /**
@@ -46,7 +55,11 @@ class Review extends Controller
      */
     public function show($id)
     {
-        //
+        $review = ReviewModel::find($id);
+        if(is_null($review)){
+            return response()->json(["message"=>'Record not found'],404);
+        }
+        return response()->json(ReviewModel::find($id),200);
     }
 
     /**
@@ -69,7 +82,12 @@ class Review extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $review = ReviewModel::find($id);
+        if(is_null($review)){
+            return response()->json(["message"=>'Record not found'],404);
+        }
+        $review -> update($request -> all());
+        return response()->json($review,200);
     }
 
     /**
@@ -80,6 +98,11 @@ class Review extends Controller
      */
     public function destroy($id)
     {
-        //
+        $review = ReviewModel::find($id);
+        if(is_null($review)){
+            return response()->json(["message"=>'Record not found'],404);
+        }
+        $review-> delete();
+        return response()->json(null,204);
     }
 }

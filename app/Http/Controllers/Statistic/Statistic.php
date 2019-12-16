@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Statistic;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\StatisticModel;
+use Validator;
 
 class Statistic extends Controller
 {
@@ -14,7 +16,7 @@ class Statistic extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(StatisticModel::get(),200);
     }
 
     /**
@@ -35,7 +37,14 @@ class Statistic extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validator = Validator::make($request->all());
+        if($validator->fails()){
+            return response()->json($validator->errors(),400);
+        }
+
+        $statistic = StatisticModel::create($request->all());
+        return response()->json($statistic,201);
     }
 
     /**
@@ -46,7 +55,11 @@ class Statistic extends Controller
      */
     public function show($id)
     {
-        //
+        $statistic = StatisticModel::find($id);
+        if(is_null($statistic)){
+            return response()->json(["message"=>'Record not found'],404);
+        }
+        return response()->json(StatisticModel::find($id),200);
     }
 
     /**
@@ -69,7 +82,12 @@ class Statistic extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $statistic = StatisticModel::find($id);
+        if(is_null($statistic)){
+            return response()->json(["message"=>'Record not found'],404);
+        }
+        $statistic -> update($request -> all());
+        return response()->json($statistic,200);
     }
 
     /**
@@ -80,6 +98,11 @@ class Statistic extends Controller
      */
     public function destroy($id)
     {
-        //
+        $statistic = StatisticModel::find($id);
+        if(is_null($statistic)){
+            return response()->json(["message"=>'Record not found'],404);
+        }
+        $statistic-> delete();
+        return response()->json(null,204);
     }
 }
