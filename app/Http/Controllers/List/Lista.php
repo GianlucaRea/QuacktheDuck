@@ -1,23 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\List;
+namespace App\Http\Controllers\Lista;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ListModel;
 use Validator;
 
-class List extends Controller
+class Lista extends Controller
 {
+    /**
+     * I can't use the normal name List because it gives me error so i just put the italian equivalent. 
+     */
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return response()->json(ListModel::get(),200);
-    }
+{
+      return response()->json(ListModel::get(),200);
+}
 
     /**
      * Show the form for creating a new resource.
@@ -25,9 +28,9 @@ class List extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
-    }
+{
+    //
+}
 
     /**
      * Store a newly created resource in storage.
@@ -36,16 +39,16 @@ class List extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+{
 
-        $validator = Validator::make($request->all());
-        if($validator->fails()){
-            return response()->json($validator->errors(),400);
-        }
+            $validator = Validator::make($request->all());
+            if($validator->fails()){
+                return response()->json($validator->errors(),400);
+            }
 
-        $list = ListModel::create($request->all());
-        return response()->json($list,201);
-    }
+            $list = ListModel::create($request->all());
+            return response()->json($list,201);
+}
 
     /**
      * Display the specified resource.
@@ -54,13 +57,13 @@ class List extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        $list = ListModel::find($id);
-        if(is_null($list)){
-            return response()->json(["message"=>'Record not found'],404);
-        }
-        return response()->json(ListModel::find($id),200);
-    }
+{
+         $list = ListModel::find($id);
+         if(is_null($list)){
+             return response()->json(["message"=>'Record not found'],404);
+         }
+         return response()->json(ListModel::find($id),200);
+}
 
     /**
      * Show the form for editing the specified resource.
@@ -69,9 +72,9 @@ class List extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
-    }
+{
+    //
+}
 
     /**
      * Update the specified resource in storage.
@@ -81,14 +84,14 @@ class List extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $list = ListModel::find($id);
-        if(is_null($list)){
-            return response()->json(["message"=>'Record not found'],404);
-        }
-        $list -> update($request -> all());
-        return response()->json($list,200);
-    }
+{
+      $list = ListModel::find($id);
+     if(is_null($list)){
+         return response()->json(["message"=>'Record not found'],404);
+     }
+     $list -> update($request -> all());
+     return response()->json($list,200);
+}
 
     /**
      * Remove the specified resource from storage.
@@ -97,12 +100,14 @@ class List extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        $list = ListModel::find($id);
+{
+         $list = ListModel::find($id);
         if(is_null($list)){
             return response()->json(["message"=>'Record not found'],404);
         }
         $list-> delete();
         return response()->json(null,204);
-    }
 }
+}
+
+
