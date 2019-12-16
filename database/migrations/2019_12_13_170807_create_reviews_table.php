@@ -16,9 +16,9 @@ class CreateReviewsTable extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->bigIncrements('id_review')->unique();
             $table->unsignedBigInteger('id_review_by_user');
-            $table->foreign('id_review_by_user') ->references('id_user')->on('users');
+            $table->foreign('id_review_by_user') ->references('id')->on('users');
             $table->unsignedBigInteger('id_document_reviewed');
-            $table->foreign('id_document_reviewed') ->references('document_id')->on('documents');
+            $table->foreign('id_document_reviewed') ->references('id')->on('documents');
             $table->integer('stars_number');
         });
     }

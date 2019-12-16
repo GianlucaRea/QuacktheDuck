@@ -14,13 +14,13 @@ class CreateDocumentsTable extends Migration
     public function up()
     {
         Schema::create('documents', function (Blueprint $table) {
-            $table->bigIncrements('document_id')->unique();
+            $table->bigIncrements('id')->unique();
             $table->String('title');
             $table->integer('highlighting')->default('0');
             $table->String('university');
             $table->String('course');
             $table->String('subject');
-            $table->String('source');
+            $table->String('source')->nullable();
         });
     }
 

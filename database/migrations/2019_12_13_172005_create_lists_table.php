@@ -15,9 +15,9 @@ class CreateListsTable extends Migration
     {
         Schema::create('lists', function (Blueprint $table) {
             $table->unsignedBigInteger('id_list_of_user');
-            $table->foreign('id_list_of_user') ->references('id_user')->on('users');
+            $table->foreign('id_list_of_user') ->references('id')->on('users');
             $table->unsignedBigInteger('id_list_document');
-            $table->foreign('id_list_document') ->references('document_id')->on('documents');
+            $table->foreign('id_list_document') ->references('id')->on('documents');
             $table->boolean('notification')->default(false);
             $table->boolean('bookmark')->default(false);
         });

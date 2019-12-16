@@ -17,6 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::apiResource('user','Utente\Utente');
 Route::apiResource('admin','Admin\Admin');
 Route::apiResource('content','Content\Content');
 Route::apiResource('document','Document\Document');
@@ -25,3 +26,4 @@ Route::apiResource('review','Review\Review');
 Route::apiResource('statistic','Statistic\Statistic');
 Route::apiResource('tag','Tag\Tag');
 Route::apiResource('version','Version\Version');
+
