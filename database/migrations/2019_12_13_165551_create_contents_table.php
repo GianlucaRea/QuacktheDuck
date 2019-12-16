@@ -14,7 +14,7 @@ class CreateContentsTable extends Migration
     public function up()
     {
         Schema::create('contents', function (Blueprint $table) {
-            $table->integer("content_id");
+            $table->unsignedBigInteger("content_id");
             $table->foreign('content_id') ->references('document_id')->on('documents');
             $table->String('type');
             $table->String('file');

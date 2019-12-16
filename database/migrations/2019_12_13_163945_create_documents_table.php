@@ -14,7 +14,7 @@ class CreateDocumentsTable extends Migration
     public function up()
     {
         Schema::create('documents', function (Blueprint $table) {
-            $table->integer('document_id')->unique();
+            $table->bigIncrements('document_id')->unique();
             $table->String('title');
             $table->integer('highlighting')->default('0');
             $table->String('university');

@@ -14,10 +14,10 @@ class CreateReviewsTable extends Migration
     public function up()
     {
         Schema::create('reviews', function (Blueprint $table) {
-            $table->integer('id_review')->unique()->unsigned();
-            $table->bigIncrements('id_review_by_user');
+            $table->bigIncrements('id_review')->unique();
+            $table->unsignedBigInteger('id_review_by_user');
             $table->foreign('id_review_by_user') ->references('id_user')->on('users');
-            $table->integer('id_document_reviewed');
+            $table->unsignedBigInteger('id_document_reviewed');
             $table->foreign('id_document_reviewed') ->references('document_id')->on('documents');
             $table->integer('stars_number');
         });

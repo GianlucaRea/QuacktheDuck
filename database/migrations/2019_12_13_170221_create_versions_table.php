@@ -14,7 +14,7 @@ class CreateVersionsTable extends Migration
     public function up()
     {
         Schema::create('versions', function (Blueprint $table) {
-            $table->integer('version_id');
+            $table->unsignedBigInteger('version_id');
             $table->foreign('version_id') ->references('document_id')->on('documents');
             $table->integer('version_number');
         });
