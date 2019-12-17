@@ -15,7 +15,8 @@ class Document extends Controller
      */
     public function index()
     {
-        return response()->json(DocumentModel::get(),200);
+        $documentList = DocumentModel::paginate(10);
+        return response()->json($documentList,200);
     }
 
     /**

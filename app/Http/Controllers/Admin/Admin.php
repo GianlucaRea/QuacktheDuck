@@ -16,7 +16,8 @@ class Admin extends Controller
      */
     public function index()
     {
-        return response()->json(AdminModel::get(),200);
+        $adminList = AdminModel::paginate(10);
+        return response()->json($adminList,200);
     }
 
     /**

@@ -16,6 +16,8 @@ class Content extends Controller
      */
     public function index()
     {
+        $contentList = ContentModel::paginate(10);
+        return response()->json($contentList,200);
         //return response()->download(public_path('duckbath.jpg'),user image
     }
 

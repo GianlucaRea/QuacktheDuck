@@ -19,7 +19,8 @@ class Lista extends Controller
      */
     public function index()
 {
-      return response()->json(ListModel::get(),200);
+    $listaList = ListaModel::paginate(10);
+    return response()->json($listaList,200);
 }
 
     /**

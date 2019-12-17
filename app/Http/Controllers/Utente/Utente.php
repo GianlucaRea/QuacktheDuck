@@ -14,7 +14,8 @@ class Utente extends Controller
      */
     public function index()
     {
-        return response()->json(UtenteModel::get(),200);
+        $utenteList = UtenteModel::paginate(10);
+        return response()->json($utenteList,200);
     }
 
     /**

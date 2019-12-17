@@ -16,7 +16,8 @@ class Version extends Controller
      */
     public function index()
     {
-        return response()->json(VersionModel::get(),200);
+        $versionList = VersionModel::paginate(10);
+        return response()->json($versionList,200);
 
     }
 

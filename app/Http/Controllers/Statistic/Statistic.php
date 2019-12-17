@@ -16,7 +16,8 @@ class Statistic extends Controller
      */
     public function index()
     {
-        return response()->json(StatisticModel::get(),200);
+        $statisticList = StatisticModel::paginate(10);
+        return response()->json($statisticList,200);
     }
 
     /**

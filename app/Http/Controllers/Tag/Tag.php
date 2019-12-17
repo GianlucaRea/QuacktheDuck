@@ -16,7 +16,8 @@ class Tag extends Controller
      */
     public function index()
     {
-        return response()->json(TagModel::get(),200);
+        $tagList = TagModel::paginate(10);
+        return response()->json($tagList,200);
 
     }
 

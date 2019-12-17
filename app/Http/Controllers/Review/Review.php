@@ -16,7 +16,8 @@ class Review extends Controller
      */
     public function index()
     {
-        return response()->json(ReviewModel::get(),200);
+        $reviewList = ReviewModel::paginate(10);
+        return response()->json($reviewList,200);
     }
 
     /**
