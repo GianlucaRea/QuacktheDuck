@@ -18,6 +18,13 @@ class CreateVersionsTable extends Migration
             $table->foreign('id') ->references('id')->on('documents');
             $table->integer('version_number');
         });
+        DB::table('versions')->insert([
+            ['id'=>'1','version_number'=> '1'],
+            ['id'=>'2','version_number'=> '1'],
+            ['id'=>'3','version_number'=> '1'],
+            ['id'=>'4','version_number'=> '1'],
+            ['id'=>'4','version_number'=> '2'],
+        ]);
     }
 
     /**

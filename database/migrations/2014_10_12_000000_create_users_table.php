@@ -13,7 +13,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::connection('mysql')->create('users', function (Blueprint $table) {
             $table->bigIncrements('id')->unique();
             $table->string('name');
             $table->string('surname');
@@ -26,8 +26,17 @@ class CreateUsersTable extends Migration
             $table->integer('points')->default(0);
             $table->rememberToken();
             $table->timestamps();
+
+            $table->engine = 'InnoDB';
         });
+            DB::table('users')->insert([
+            ['name' => 'Giacomo', 'surname' => 'Rossi', 'email' => 'giacomo.rossi@gmail.com','password'=>'giacomo100','university'=>'Unibo','course'=>'Informatica'],
+            ['name' => 'Aldo', 'surname' => 'Verdi', 'email' => 'aldo.verdi@gmail.com','password'=>'verdi1100','university'=>'Univaq','course'=>'Informatica'],
+            ['name' => 'Giovanni', 'surname' => 'Basso', 'email' => 'giovanni.basso@gmail.com','password'=>'basso100','university'=>'Unibo','course'=>'Letteratura'],
+            ['name' => 'Matteo', 'surname' => 'Rossi', 'email' => 'matteo.rossi@gmail.com','password'=>'matteo2919','university'=>'Unimi','course'=>'Informatica'],
+        ]);
     }
+
 
     /**
      * Reverse the migrations.

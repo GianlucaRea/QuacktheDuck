@@ -20,6 +20,10 @@ class CreateAdminsTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
         });
+
+        DB::table('admins')->insert([
+           ['name'=>'Gianluca','surname'=>'Rea','email'=>'reagianluca97@gmail.com','password'=>'passwordcasuale'],
+        ]);
     }
 
     /**
