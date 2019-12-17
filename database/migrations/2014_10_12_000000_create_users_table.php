@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('university');
             $table->string('course');
             $table->boolean('subscription')->default(false);
-            $table->integer('points')->default(0);
+            $table->integer('points')->default(10);
             $table->rememberToken();
             $table->timestamps();
 

@@ -21,6 +21,9 @@ class CreateReviewsTable extends Migration
             $table->foreign('id_document_reviewed') ->references('id')->on('documents');
             $table->integer('stars_number');
         });
+
+
+
     }
 
     /**

@@ -38,7 +38,10 @@ class Review extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all());
+        $rules = [
+            'stars_number'=> 'numeric|min:1|max:5',
+        ];
+        $validator = Validator::make($request->all(),$rules);
         if($validator->fails()){
             return response()->json($validator->errors(),400);
         }
