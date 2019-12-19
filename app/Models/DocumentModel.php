@@ -8,7 +8,8 @@ class DocumentModel extends Model
 {
     protected $table ="documents";
     protected $fillable = [
-        'document_id',
+        'id',
+        'id_user_document',
         'title',
         'highlighting',
         'university',

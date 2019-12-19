@@ -38,6 +38,7 @@ class Document extends Controller
     public function store(Request $request)
     {
         $rules = [
+            'id_user_document'=>'required',
             'title' => 'required|min:3',
             'university' => 'required',
             'course' => 'required',

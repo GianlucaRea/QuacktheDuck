@@ -25,9 +25,9 @@ class CreateDocumentsTable extends Migration
             $table->String('source')->nullable();
         });
         DB::table('documents')->insert([
-            ['id_user_document' => '1' , 'title' => 'appunti fisica 1' ,'university' => 'Unibo' , 'course' => 'Informatica','subject'=>'Fisica'],
-            ['id_user_document' => '1' , 'title' => 'appunti database' ,'university' => 'Unibo' , 'course' => 'Informatica','subject'=>'Informatica'],
-            ['id_user_document' => '3' , 'title' => 'appunti dante' ,'university' => 'Unimi' , 'course' => 'Letteratura','subject'=>'Letteratura'],
+            ['id_user_document' => '1' , 'title' => 'appunti fisica 1' ,'university' => 'Univaq' , 'course' => 'Informatica','subject'=>'Informatica'],
+            ['id_user_document' => '1' , 'title' => 'appunti database' ,'university' => 'Univaq' , 'course' => 'Informatica','subject'=>'Informatica'],
+            ['id_user_document' => '3' , 'title' => 'appunti dante' ,'university' => 'Univaq' , 'course' => 'Letteratura','subject'=>'Letteratura'],
             ['id_user_document' => '2' , 'title' => 'appunti machine learning' ,'university' => 'Univaq' , 'course' => 'Informatica','subject'=>'IA'],
         ]);
     }

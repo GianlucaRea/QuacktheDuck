@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Utente;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\UtenteModel;
+use Validator;
 class Utente extends Controller
 {
     /**
@@ -36,7 +37,13 @@ class Utente extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all());
+        if($validator->fails()){
+            return response()->json($validator->errors(),400);
+        }
+
+        $tag = UtenteModel::create($request->all());
+        return response()->json($tag,201);
     }
 
     /**
@@ -75,7 +82,12 @@ class Utente extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $utente = UtenteModel::find($id);
+        if(is_null($utente)){
+            return response()->json(["message"=>'Record not found'],404);
+        }
+        $utente -> update($request -> all());
+        return response()->json($utente,200);
     }
 
     /**
@@ -86,6 +98,11 @@ class Utente extends Controller
      */
     public function destroy($id)
     {
-        //
+        $utente = UtenteModel::find($id);
+        if(is_null($utente)){
+            return response()->json(["message"=>'Record not found'],404);
+        }
+        $utente-> delete();
+        return response()->json(null,204);
     }
 }

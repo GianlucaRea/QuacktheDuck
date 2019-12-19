@@ -29,6 +29,18 @@ class CreateUsersTable extends Migration
 
             $table->engine = 'InnoDB';
         });
+
+        DB::table('users')->insert([
+            ['name' => 'matteo' ,'surname' => 'riei' , 'email'=>'emailcasuale1@qualcosa.com','password' =>'password1','university'=>'Univaq','course'=>'informatica'],
+            ['name' => 'giovanni' ,'surname' => 'ribbi' , 'email'=>'emailcasuale2@qualcosa.com','password' =>'password2','university'=>'Univaq','course'=>'informatica'],
+            ['name' => 'luca' ,'surname' => 'inno' , 'email'=>'emailcasuale3@qualcosa.com','password' =>'password3','university'=>'Univaq','course'=>'informatica'],
+            ['name' => 'giuseppe' ,'surname' => 'cognome' , 'email'=>'emailcasuale4@qualcosa.com','password' =>'password4','university'=>'Univaq','course'=>'informatica'],
+
+        ]);
+
+
+
+
     }
 
 
