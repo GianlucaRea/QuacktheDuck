@@ -9,8 +9,8 @@ class ContentModel extends Model
     protected $table = "contents";
     public $timestamps = false;
     protected $fillable = [
-        'id',
-       'type',
-       'file',
+        'id_doc',
+        'type',
+         'file',
     ];
 }

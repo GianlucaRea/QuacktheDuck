@@ -14,16 +14,17 @@ class CreateContentsTable extends Migration
     public function up()
     {
         Schema::create('contents', function (Blueprint $table) {
-            $table->unsignedBigInteger('id');
-            $table->foreign('id') ->references('id')->on('documents');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('id_doc');
+            $table->foreign('id_doc') ->references('id')->on('documents');
             $table->String('type');
             $table->String('file');
         });
         DB::table('contents')->insert([
-            ['id'=>'1','type'=> 'pdf','file'=>'appuntifisica1.pdf'],
-            ['id'=>'2','type'=> 'pdf','file'=>'appuntidatabase.pdf'],
-            ['id'=>'3','type'=> 'pdf','file'=>'appuntidante.pdf'],
-            ['id'=>'4','type'=> 'pdf','file'=>'appuntimachinelearning.pdf'],
+            ['id_doc'=>'1','type'=> 'pdf','file'=>'appuntifisica1.pdf'],
+            ['id_doc'=>'2','type'=> 'pdf','file'=>'appuntidatabase.pdf'],
+            ['id_doc'=>'3','type'=> 'pdf','file'=>'appuntidante.pdf'],
+            ['id_doc'=>'4','type'=> 'pdf','file'=>'appuntimachinelearning.pdf'],
         ]);
     }
 
