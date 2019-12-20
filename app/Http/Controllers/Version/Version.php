@@ -40,6 +40,7 @@ class Version extends Controller
     public function store(Request $request)
     {
         $rules = [
+            'id_document'=>'required',
             'version_number' => 'required',
         ];
         $validator = Validator::make($request->all(),$rules);

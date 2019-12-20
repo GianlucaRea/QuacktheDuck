@@ -40,6 +40,8 @@ class Review extends Controller
     public function store(Request $request)
     {
         $rules = [
+            'id_review_by_user'=>'required',
+             'id_document_reviewed'=>'required',
             'stars_number'=> 'numeric|min:1|max:5',
         ];
         $validator = Validator::make($request->all(),$rules);
@@ -86,11 +88,19 @@ class Review extends Controller
      */
     public function update(Request $request, $id)
     {
+        $rules = [
+            'stars_number'=> 'numeric|min:1|max:5',
+        ];
+
+        $validator = Validator::make($request->all(),$rules);
+        if($validator->fails()){
+            return response()->json($validator->errors(),400);
+        }
         $review = ReviewModel::find($id);
         if(is_null($review)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        $review -> update($request -> all());
+        $review -> update($request -> all(),$rules);
         return response()->json($review,200);
     }
 

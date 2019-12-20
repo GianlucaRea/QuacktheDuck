@@ -21,7 +21,7 @@ Route::apiResource('user','Utente\Utente');
 Route::apiResource('admin','Admin\Admin');
 Route::apiResource('content','Content\Content');
 Route::apiResource('document','Document\Document');
-Route::apiResource('list','List\Lista');
+Route::apiResource('list','Lista\Lista');
 Route::apiResource('review','Review\Review');
 Route::apiResource('statistic','Statistic\Statistic');
 Route::apiResource('tag','Tag\Tag');

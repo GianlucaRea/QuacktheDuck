@@ -14,6 +14,7 @@ class CreateListsTable extends Migration
     public function up()
     {
         Schema::create('lists', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('id_list_of_user');
             $table->foreign('id_list_of_user') ->references('id')->on('users');
             $table->unsignedBigInteger('id_list_document');

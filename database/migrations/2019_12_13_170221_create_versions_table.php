@@ -14,16 +14,17 @@ class CreateVersionsTable extends Migration
     public function up()
     {
         Schema::create('versions', function (Blueprint $table) {
-            $table->unsignedBigInteger('id');
-            $table->foreign('id') ->references('id')->on('documents');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('id_document');
+            $table->foreign('id_document') ->references('id')->on('documents');
             $table->integer('version_number');
         });
         DB::table('versions')->insert([
-            ['id'=>'1','version_number'=> '1'],
-            ['id'=>'2','version_number'=> '1'],
-            ['id'=>'3','version_number'=> '1'],
-            ['id'=>'4','version_number'=> '1'],
-            ['id'=>'4','version_number'=> '2'],
+            ['id_document'=>'1','version_number'=> '1'],
+            ['id_document'=>'2','version_number'=> '1'],
+            ['id_document'=>'3','version_number'=> '1'],
+            ['id_document'=>'4','version_number'=> '1'],
+            ['id_document'=>'4','version_number'=> '2'],
         ]);
     }
 

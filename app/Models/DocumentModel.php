@@ -17,4 +17,5 @@ class DocumentModel extends Model
         'subject',
         'source',
     ];
+    public $timestamps = false;
 }

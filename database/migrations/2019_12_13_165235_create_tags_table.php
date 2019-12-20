@@ -14,15 +14,16 @@ class CreateTagsTable extends Migration
     public function up()
     {
         Schema::create('tags', function (Blueprint $table) {
-            $table->unsignedBigInteger('id');
-            $table->foreign('id') ->references('id')->on('documents');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('id_document');
+            $table->foreign('id_document') ->references('id')->on('documents');
             $table->String('tag_name');
         });
         DB::table('tags')->insert([
-            ['id'=> '1','tag_name'=>'fisica'],['id'=> '1','tag_name'=>'meccanica'],
-            ['id'=> '2','tag_name'=>'database'],['id'=> '1','tag_name'=>'query'],
-            ['id'=> '3','tag_name'=>'divina commedia'],['id'=> '1','tag_name'=>'alighieri'],
-            ['id'=> '4','tag_name'=>'Machine Learning'],['id'=> '1','tag_name'=>'alexa'],
+            ['id_document'=> '1','tag_name'=>'fisica'],['id_document'=> '1','tag_name'=>'meccanica'],
+            ['id_document'=> '2','tag_name'=>'database'],['id_document'=> '2','tag_name'=>'query'],
+            ['id_document'=> '3','tag_name'=>'divina commedia'],['id_document'=> '3','tag_name'=>'alighieri'],
+            ['id_document'=> '4','tag_name'=>'Machine Learning'],['id_document'=> '4','tag_name'=>'alexa'],
             ]);
 
     }

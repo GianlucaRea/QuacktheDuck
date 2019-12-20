@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class TagModel extends Model
 {
+    public $timestamps = false;
     protected $table = "tags";
     protected $fillable = [
+        'id_document',
         'tag_name',
     ];
 

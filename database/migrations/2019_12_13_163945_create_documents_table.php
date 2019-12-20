@@ -23,6 +23,8 @@ class CreateDocumentsTable extends Migration
             $table->String('course');
             $table->String('subject');
             $table->String('source')->nullable();
+
+
         });
         DB::table('documents')->insert([
             ['id_user_document' => '1' , 'title' => 'appunti fisica 1' ,'university' => 'Univaq' , 'course' => 'Informatica','subject'=>'Informatica'],

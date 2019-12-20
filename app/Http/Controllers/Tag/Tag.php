@@ -39,7 +39,11 @@ class Tag extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all());
+        $rules=[
+            'id_document' => 'required',
+            'tag_name' => 'required'
+        ];
+        $validator = Validator::make($request->all(),$rules);
         if($validator->fails()){
             return response()->json($validator->errors(),400);
         }

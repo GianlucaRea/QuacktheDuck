@@ -10,7 +10,7 @@ use Validator;
 class Lista extends Controller
 {
     /**
-     * I can't use the normal name List because it gives me error so i just put the italian equivalent.
+     * I can't use the normal name in english because it gives me error so i just put the italian equivalent.
      */
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class Lista extends Controller
      */
     public function index()
 {
-    $listaList = ListaModel::paginate(10);
+    $listaList = ListModel::paginate(10);
     return response()->json($listaList,200);
 }
 
@@ -41,8 +41,14 @@ class Lista extends Controller
      */
     public function store(Request $request)
 {
+            $rules=[
+                'id_list_of_user'=>'required',
+                'id_list_document'=>'required',
+                'notification'=>'boolean',
+                'bookmark'=>'boolean',
+            ];
 
-            $validator = Validator::make($request->all());
+            $validator = Validator::make($request->all(),$rules);
             if($validator->fails()){
                 return response()->json($validator->errors(),400);
             }
@@ -86,6 +92,17 @@ class Lista extends Controller
      */
     public function update(Request $request, $id)
 {
+    $rules=[
+        'id_list_of_user'=>'required',
+        'id_list_document'=>'required',
+        'notification'=>'boolean',
+        'bookmark'=>'boolean',
+    ];
+
+    $validator = Validator::make($request->all(),$rules);
+    if($validator->fails()){
+        return response()->json($validator->errors(),400);
+    }
       $list = ListModel::find($id);
      if(is_null($list)){
          return response()->json(["message"=>'Record not found'],404);

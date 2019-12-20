@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UtenteModel extends Model
 {
+    public $timestamps = false;
     protected $table = "users";
     protected $fillable = [
         'name','surname', 'email', 'password', 'university','course'
