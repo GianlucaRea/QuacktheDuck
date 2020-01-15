@@ -17,13 +17,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('user','Utente\Utente');
-Route::apiResource('admin','Admin\Admin');
-Route::apiResource('content','Content\Content');
-Route::apiResource('document','Document\Document');
-Route::apiResource('list','Lista\Lista');
-Route::apiResource('review','Review\Review');
-Route::apiResource('statistic','Statistic\Statistic');
-Route::apiResource('tag','Tag\Tag');
-Route::apiResource('version','Version\Version');
+Route::apiResource('users','Utente\Utente');
+Route::apiResource('admins','Admin\Admin');
+Route::apiResource('contents','Content\Content');
+Route::apiResource('documents','Document\Document');
+Route::apiResource('reviews','Review\Review');
+Route::apiResource('statistics','Statistic\Statistic');
+Route::apiResource('tags','Tag\Tag');
+Route::apiResource('versions','Version\Version');
 
