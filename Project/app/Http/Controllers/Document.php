@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Review;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\ReviewModel;
+use App\Models\DocumentModel;
 use Validator;
-
-class Review extends Controller
+class Document extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,8 @@ class Review extends Controller
      */
     public function index()
     {
-        $reviewList = ReviewModel::paginate(10);
-        return response()->json($reviewList,200);
+        $documentList = DocumentModel::paginate(10);
+        return response()->json($documentList,200);
     }
 
     /**
@@ -28,7 +27,6 @@ class Review extends Controller
     public function create()
     {
         //
-
     }
 
     /**
@@ -40,17 +38,20 @@ class Review extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'id_review_by_user'=>'required',
-             'id_document_reviewed'=>'required',
-            'stars_number'=> 'numeric|min:1|max:5',
+            'id_user_document'=>'required',
+            'title' => 'required|min:3',
+            'university' => 'required',
+            'course' => 'required',
+            'subject' => 'required',
+
         ];
         $validator = Validator::make($request->all(),$rules);
         if($validator->fails()){
             return response()->json($validator->errors(),400);
         }
 
-        $review = ReviewModel::create($request->all());
-        return response()->json($review,201);
+        $document = DocumentModel::create($request->all());
+        return response()->json($document,201);
     }
 
     /**
@@ -61,11 +62,11 @@ class Review extends Controller
      */
     public function show($id)
     {
-        $review = ReviewModel::find($id);
-        if(is_null($review)){
+        $document = DocumentModel::find($id);
+        if(is_null($document)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        return response()->json(ReviewModel::find($id),200);
+        return response()->json(DocumentModel::find($id),200);
     }
 
     /**
@@ -88,20 +89,12 @@ class Review extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rules = [
-            'stars_number'=> 'numeric|min:1|max:5',
-        ];
-
-        $validator = Validator::make($request->all(),$rules);
-        if($validator->fails()){
-            return response()->json($validator->errors(),400);
-        }
-        $review = ReviewModel::find($id);
-        if(is_null($review)){
+        $document = DocumentModel::find($id);
+        if(is_null($document)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        $review -> update($request -> all(),$rules);
-        return response()->json($review,200);
+        $document -> update($request -> all());
+        return response()->json($document,200);
     }
 
     /**
@@ -112,11 +105,11 @@ class Review extends Controller
      */
     public function destroy($id)
     {
-        $review = ReviewModel::find($id);
-        if(is_null($review)){
+        $document = DocumentModel::find($id);
+        if(is_null($document)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        $review-> delete();
+        $document-> delete();
         return response()->json(null,204);
     }
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Version;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\VersionModel;
+use App\Models\TagModel;
 use Validator;
 
-class Version extends Controller
+class Tag extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class Version extends Controller
      */
     public function index()
     {
-        $versionList = VersionModel::paginate(10);
-        return response()->json($versionList,200);
+        $tagList = TagModel::paginate(10);
+        return response()->json($tagList,200);
 
     }
 
@@ -28,7 +28,7 @@ class Version extends Controller
      */
     public function create()
     {
-        //
+    //
     }
 
     /**
@@ -39,17 +39,17 @@ class Version extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'id_document'=>'required',
-            'version_number' => 'required',
+        $rules=[
+            'id_document' => 'required',
+            'tag_name' => 'required'
         ];
         $validator = Validator::make($request->all(),$rules);
         if($validator->fails()){
             return response()->json($validator->errors(),400);
         }
 
-        $version = VersionModel::create($request->all());
-        return response()->json($version,201);
+        $tag = TagModel::create($request->all());
+        return response()->json($tag,201);
     }
 
     /**
@@ -60,11 +60,11 @@ class Version extends Controller
      */
     public function show($id)
     {
-        $version = VersionModel::find($id);
-        if(is_null($version)){
+        $tag = TagModel::find($id);
+        if(is_null($tag)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        return response()->json(VersionModel::find($id),200);
+        return response()->json(TagModel::find($id),200);
     }
 
     /**
@@ -87,12 +87,12 @@ class Version extends Controller
      */
     public function update(Request $request, $id)
     {
-        $version = VersionModel::find($id);
-        if(is_null($version)){
+        $tag = TagModel::find($id);
+        if(is_null($tag)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        $version -> update($request -> all());
-        return response()->json($version,200);
+        $tag -> update($request -> all());
+        return response()->json($tag,200);
     }
 
     /**
@@ -103,11 +103,11 @@ class Version extends Controller
      */
     public function destroy($id)
     {
-        $version = VersionModel::find($id);
-        if(is_null($version)){
+        $tag = TagModel::find($id);
+        if(is_null($tag)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        $version-> delete();
+        $tag-> delete();
         return response()->json(null,204);
     }
 }

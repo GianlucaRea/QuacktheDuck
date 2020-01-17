@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use Validator;
 use App\Http\Controllers\Controller;
-use App\Models\AdminModel;
 use Illuminate\Http\Request;
+use App\Models\ContentModel;
+use Validator;
 
-class Admin extends Controller
+class Content extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,9 @@ class Admin extends Controller
      */
     public function index()
     {
-        $adminList = AdminModel::paginate(10);
-        return response()->json($adminList,200);
+        $contentList = ContentModel::paginate(10);
+        return response()->json($contentList,200);
+        //return response()->download(public_path('duckbath.jpg'),user image
     }
 
     /**
@@ -38,21 +39,19 @@ class Admin extends Controller
      */
     public function store(Request $request)
     {
+
         $rules = [
-            'name' => 'required|min:2',
-            'surname' => 'required|min:2',
-            'email' => 'required',
-            'password' => 'required|min:8',
+            'type' => 'required',
+            'file' => 'required',
         ];
         $validator = Validator::make($request->all(),$rules);
         if($validator->fails()){
             return response()->json($validator->errors(),400);
         }
 
-        $country = AdminModel::create($request->all());
+        $country = ContentModel::create($request->all());
         return response()->json($country,201);
     }
-
 
     /**
      * Display the specified resource.
@@ -62,11 +61,11 @@ class Admin extends Controller
      */
     public function show($id)
     {
-        $admin = AdminModel::find($id);
-        if(is_null($admin)){
+        $content = ContentModel::find($id);
+        if(is_null($content)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        return response()->json(AdminModel::find($id),200);
+        return response()->json(ContentModel::find($id),200);
     }
 
     /**
@@ -89,12 +88,12 @@ class Admin extends Controller
      */
     public function update(Request $request, $id)
     {
-        $admin = AdminModel::find($id);
-        if(is_null($admin)){
+        $content = ContentModel::find($id);
+        if(is_null($content)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        $admin -> update($request -> all());
-        return response()->json($admin,200);
+        $content -> update($request -> all());
+        return response()->json($content,200);
     }
 
     /**
@@ -105,11 +104,11 @@ class Admin extends Controller
      */
     public function destroy($id)
     {
-        $admin = AdminModel::find($id);
-        if(is_null($admin)){
+        $content = ContentModel::find($id);
+        if(is_null($content)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        $admin-> delete();
+        $content-> delete();
         return response()->json(null,204);
     }
 }

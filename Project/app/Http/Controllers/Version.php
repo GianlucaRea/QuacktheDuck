@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Document;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\DocumentModel;
+use App\Models\VersionModel;
 use Validator;
-class Document extends Controller
+
+class Version extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,9 @@ class Document extends Controller
      */
     public function index()
     {
-        $documentList = DocumentModel::paginate(10);
-        return response()->json($documentList,200);
+        $versionList = VersionModel::paginate(10);
+        return response()->json($versionList,200);
+
     }
 
     /**
@@ -38,20 +40,16 @@ class Document extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'id_user_document'=>'required',
-            'title' => 'required|min:3',
-            'university' => 'required',
-            'course' => 'required',
-            'subject' => 'required',
-
+            'id_document'=>'required',
+            'version_number' => 'required',
         ];
         $validator = Validator::make($request->all(),$rules);
         if($validator->fails()){
             return response()->json($validator->errors(),400);
         }
 
-        $document = DocumentModel::create($request->all());
-        return response()->json($document,201);
+        $version = VersionModel::create($request->all());
+        return response()->json($version,201);
     }
 
     /**
@@ -62,11 +60,11 @@ class Document extends Controller
      */
     public function show($id)
     {
-        $document = DocumentModel::find($id);
-        if(is_null($document)){
+        $version = VersionModel::find($id);
+        if(is_null($version)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        return response()->json(DocumentModel::find($id),200);
+        return response()->json(VersionModel::find($id),200);
     }
 
     /**
@@ -89,12 +87,12 @@ class Document extends Controller
      */
     public function update(Request $request, $id)
     {
-        $document = DocumentModel::find($id);
-        if(is_null($document)){
+        $version = VersionModel::find($id);
+        if(is_null($version)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        $document -> update($request -> all());
-        return response()->json($document,200);
+        $version -> update($request -> all());
+        return response()->json($version,200);
     }
 
     /**
@@ -105,11 +103,11 @@ class Document extends Controller
      */
     public function destroy($id)
     {
-        $document = DocumentModel::find($id);
-        if(is_null($document)){
+        $version = VersionModel::find($id);
+        if(is_null($version)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        $document-> delete();
+        $version-> delete();
         return response()->json(null,204);
     }
 }

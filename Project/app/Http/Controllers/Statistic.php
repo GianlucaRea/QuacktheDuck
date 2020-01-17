@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Tag;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\TagModel;
+use App\Models\StatisticModel;
 use Validator;
 
-class Tag extends Controller
+class Statistic extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,8 @@ class Tag extends Controller
      */
     public function index()
     {
-        $tagList = TagModel::paginate(10);
-        return response()->json($tagList,200);
-
+        $statisticList = StatisticModel::paginate(10);
+        return response()->json($statisticList,200);
     }
 
     /**
@@ -28,7 +27,7 @@ class Tag extends Controller
      */
     public function create()
     {
-    //
+        //
     }
 
     /**
@@ -39,17 +38,14 @@ class Tag extends Controller
      */
     public function store(Request $request)
     {
-        $rules=[
-            'id_document' => 'required',
-            'tag_name' => 'required'
-        ];
-        $validator = Validator::make($request->all(),$rules);
+
+        $validator = Validator::make($request->all());
         if($validator->fails()){
             return response()->json($validator->errors(),400);
         }
 
-        $tag = TagModel::create($request->all());
-        return response()->json($tag,201);
+        $statistic = StatisticModel::create($request->all());
+        return response()->json($statistic,201);
     }
 
     /**
@@ -60,11 +56,11 @@ class Tag extends Controller
      */
     public function show($id)
     {
-        $tag = TagModel::find($id);
-        if(is_null($tag)){
+        $statistic = StatisticModel::find($id);
+        if(is_null($statistic)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        return response()->json(TagModel::find($id),200);
+        return response()->json(StatisticModel::find($id),200);
     }
 
     /**
@@ -87,12 +83,12 @@ class Tag extends Controller
      */
     public function update(Request $request, $id)
     {
-        $tag = TagModel::find($id);
-        if(is_null($tag)){
+        $statistic = StatisticModel::find($id);
+        if(is_null($statistic)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        $tag -> update($request -> all());
-        return response()->json($tag,200);
+        $statistic -> update($request -> all());
+        return response()->json($statistic,200);
     }
 
     /**
@@ -103,11 +99,11 @@ class Tag extends Controller
      */
     public function destroy($id)
     {
-        $tag = TagModel::find($id);
-        if(is_null($tag)){
+        $statistic = StatisticModel::find($id);
+        if(is_null($statistic)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        $tag-> delete();
+        $statistic-> delete();
         return response()->json(null,204);
     }
 }

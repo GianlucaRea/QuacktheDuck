@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Statistic;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\StatisticModel;
+use App\Models\ReviewModel;
 use Validator;
 
-class Statistic extends Controller
+class Review extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class Statistic extends Controller
      */
     public function index()
     {
-        $statisticList = StatisticModel::paginate(10);
-        return response()->json($statisticList,200);
+        $reviewList = ReviewModel::paginate(10);
+        return response()->json($reviewList,200);
     }
 
     /**
@@ -28,6 +28,7 @@ class Statistic extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -38,14 +39,18 @@ class Statistic extends Controller
      */
     public function store(Request $request)
     {
-
-        $validator = Validator::make($request->all());
+        $rules = [
+            'id_review_by_user'=>'required',
+             'id_document_reviewed'=>'required',
+            'stars_number'=> 'numeric|min:1|max:5',
+        ];
+        $validator = Validator::make($request->all(),$rules);
         if($validator->fails()){
             return response()->json($validator->errors(),400);
         }
 
-        $statistic = StatisticModel::create($request->all());
-        return response()->json($statistic,201);
+        $review = ReviewModel::create($request->all());
+        return response()->json($review,201);
     }
 
     /**
@@ -56,11 +61,11 @@ class Statistic extends Controller
      */
     public function show($id)
     {
-        $statistic = StatisticModel::find($id);
-        if(is_null($statistic)){
+        $review = ReviewModel::find($id);
+        if(is_null($review)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        return response()->json(StatisticModel::find($id),200);
+        return response()->json(ReviewModel::find($id),200);
     }
 
     /**
@@ -83,12 +88,20 @@ class Statistic extends Controller
      */
     public function update(Request $request, $id)
     {
-        $statistic = StatisticModel::find($id);
-        if(is_null($statistic)){
+        $rules = [
+            'stars_number'=> 'numeric|min:1|max:5',
+        ];
+
+        $validator = Validator::make($request->all(),$rules);
+        if($validator->fails()){
+            return response()->json($validator->errors(),400);
+        }
+        $review = ReviewModel::find($id);
+        if(is_null($review)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        $statistic -> update($request -> all());
-        return response()->json($statistic,200);
+        $review -> update($request -> all(),$rules);
+        return response()->json($review,200);
     }
 
     /**
@@ -99,11 +112,11 @@ class Statistic extends Controller
      */
     public function destroy($id)
     {
-        $statistic = StatisticModel::find($id);
-        if(is_null($statistic)){
+        $review = ReviewModel::find($id);
+        if(is_null($review)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        $statistic-> delete();
+        $review-> delete();
         return response()->json(null,204);
     }
 }
