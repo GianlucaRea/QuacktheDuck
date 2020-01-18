@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\StatisticModel;
+use App\Models\ContentModel;
 use Validator;
 
-class Statistic extends Controller
+class ContentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,9 @@ class Statistic extends Controller
      */
     public function index()
     {
-        $statisticList = StatisticModel::paginate(10);
-        return response()->json($statisticList,200);
+        $contentList = ContentModel::paginate(10);
+        return response()->json($contentList,200);
+        //return response()->download(public_path('duckbath.jpg'),user image
     }
 
     /**
@@ -39,13 +40,17 @@ class Statistic extends Controller
     public function store(Request $request)
     {
 
-        $validator = Validator::make($request->all());
+        $rules = [
+            'type' => 'required',
+            'file' => 'required',
+        ];
+        $validator = Validator::make($request->all(),$rules);
         if($validator->fails()){
             return response()->json($validator->errors(),400);
         }
 
-        $statistic = StatisticModel::create($request->all());
-        return response()->json($statistic,201);
+        $country = ContentModel::create($request->all());
+        return response()->json($country,201);
     }
 
     /**
@@ -56,11 +61,11 @@ class Statistic extends Controller
      */
     public function show($id)
     {
-        $statistic = StatisticModel::find($id);
-        if(is_null($statistic)){
+        $content = ContentModel::find($id);
+        if(is_null($content)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        return response()->json(StatisticModel::find($id),200);
+        return response()->json(ContentModel::find($id),200);
     }
 
     /**
@@ -83,12 +88,12 @@ class Statistic extends Controller
      */
     public function update(Request $request, $id)
     {
-        $statistic = StatisticModel::find($id);
-        if(is_null($statistic)){
+        $content = ContentModel::find($id);
+        if(is_null($content)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        $statistic -> update($request -> all());
-        return response()->json($statistic,200);
+        $content -> update($request -> all());
+        return response()->json($content,200);
     }
 
     /**
@@ -99,11 +104,12 @@ class Statistic extends Controller
      */
     public function destroy($id)
     {
-        $statistic = StatisticModel::find($id);
-        if(is_null($statistic)){
+        $content = ContentModel::find($id);
+        if(is_null($content)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        $statistic-> delete();
+        $content-> delete();
         return response()->json(null,204);
     }
 }
+

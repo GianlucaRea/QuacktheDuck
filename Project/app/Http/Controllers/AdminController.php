@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AdminModel;
 use Illuminate\Http\Request;
 
-class Admin extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -112,4 +112,14 @@ class Admin extends Controller
         $admin->delete();
         return response()->json(null, 204);
     }
+
+    public function getApprovateDoc($document_id){}
+    public function getDeleteDoc($document_id){}
+    public function getID(){}
+    public function getName(){}
+    public function getSurname(){}
+    public function getEmail(){}
+
+
+
 }

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\ReviewModel;
 use Validator;
 
-class Review extends Controller
+class ReviewController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -119,4 +119,9 @@ class Review extends Controller
         $review-> delete();
         return response()->json(null,204);
     }
+
+     public function getReviewID(){}
+     public function getStarNumber(){}
+     public function getDataReview(){}
+
 }

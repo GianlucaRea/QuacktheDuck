@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\ContentModel;
+use App\Models\VersionModel;
 use Validator;
 
-class Content extends Controller
+class VersionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class Content extends Controller
      */
     public function index()
     {
-        $contentList = ContentModel::paginate(10);
-        return response()->json($contentList,200);
-        //return response()->download(public_path('duckbath.jpg'),user image
+        $versionList = VersionModel::paginate(10);
+        return response()->json($versionList,200);
+
     }
 
     /**
@@ -39,18 +39,17 @@ class Content extends Controller
      */
     public function store(Request $request)
     {
-
         $rules = [
-            'type' => 'required',
-            'file' => 'required',
+            'id_document'=>'required',
+            'version_number' => 'required',
         ];
         $validator = Validator::make($request->all(),$rules);
         if($validator->fails()){
             return response()->json($validator->errors(),400);
         }
 
-        $country = ContentModel::create($request->all());
-        return response()->json($country,201);
+        $version = VersionModel::create($request->all());
+        return response()->json($version,201);
     }
 
     /**
@@ -61,11 +60,11 @@ class Content extends Controller
      */
     public function show($id)
     {
-        $content = ContentModel::find($id);
-        if(is_null($content)){
+        $version = VersionModel::find($id);
+        if(is_null($version)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        return response()->json(ContentModel::find($id),200);
+        return response()->json(VersionModel::find($id),200);
     }
 
     /**
@@ -88,12 +87,12 @@ class Content extends Controller
      */
     public function update(Request $request, $id)
     {
-        $content = ContentModel::find($id);
-        if(is_null($content)){
+        $version = VersionModel::find($id);
+        if(is_null($version)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        $content -> update($request -> all());
-        return response()->json($content,200);
+        $version -> update($request -> all());
+        return response()->json($version,200);
     }
 
     /**
@@ -104,11 +103,11 @@ class Content extends Controller
      */
     public function destroy($id)
     {
-        $content = ContentModel::find($id);
-        if(is_null($content)){
+        $version = VersionModel::find($id);
+        if(is_null($version)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        $content-> delete();
+        $version-> delete();
         return response()->json(null,204);
     }
 }

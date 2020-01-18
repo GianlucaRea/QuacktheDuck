@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DocumentModel;
 use Validator;
-class Document extends Controller
+class DocumentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -112,4 +112,15 @@ class Document extends Controller
         $document-> delete();
         return response()->json(null,204);
     }
+
+
+    public function getDocID(){}
+    public function getTitle(){}
+    public function getData(){}
+    public function getSource(){}
+    public function getUniversity(){}
+    public function getCourse(){}
+    public function getSubject(){}
+    public function getVersion(){}
+    public function getNumberOfReporting(){}
 }
