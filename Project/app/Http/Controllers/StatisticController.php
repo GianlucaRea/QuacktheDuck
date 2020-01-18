@@ -108,10 +108,15 @@ class StatisticController extends Controller
     }
 
     public function getSingleDockReview(){}
+
     public function getTotalReview(){}
+
     public function getNumberUploadedDoc(){}
+
     public function getAvarageReviewSingleDoc(){}
+
     public function getTotalAvarageReview(){}
+
     public function getClassificationPosition(){}
 
 }

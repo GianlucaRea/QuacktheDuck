@@ -121,7 +121,9 @@ class ReviewController extends Controller
     }
 
      public function getReviewID(){}
+
      public function getStarNumber(){}
+
      public function getDataReview(){}
 
 }

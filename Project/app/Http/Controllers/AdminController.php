@@ -114,10 +114,15 @@ class AdminController extends Controller
     }
 
     public function getApprovateDoc($document_id){}
+
     public function getDeleteDoc($document_id){}
+
     public function getID(){}
+
     public function getName(){}
+
     public function getSurname(){}
+
     public function getEmail(){}
 
 

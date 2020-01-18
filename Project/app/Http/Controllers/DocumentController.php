@@ -115,12 +115,20 @@ class DocumentController extends Controller
 
 
     public function getDocID(){}
+
     public function getTitle(){}
+
     public function getData(){}
+
     public function getSource(){}
+
     public function getUniversity(){}
+
     public function getCourse(){}
+
     public function getSubject(){}
+
     public function getVersion(){}
+
     public function getNumberOfReporting(){}
 }

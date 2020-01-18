@@ -107,20 +107,35 @@ class UtenteController extends Controller
     }
 
      public function getID(){}
+
      public function getName(){}
+
      public function getSurname(){}
+
      public function getEmail(){}
+
      public function getUniversity(){}
+
      public function getCourse(){}
+
      public function getAvailablePoints(){}
+
      public function buyDoc(){}
+
      public function viewDoc(){}
+
      public function searchDoc(){}
+
      public function feedDoc(){}
+
      public function setPrefDoc(){}
+
      public function delPrefDoc(){}
+
      public function setNotifyDoc(){}
+
      public function delNotifyDoc(){}
+
      public function reportDoc(){}
 
 }
