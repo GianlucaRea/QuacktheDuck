@@ -17,4 +17,6 @@ class Statistic extends Model
     {
         return $this->hasMany('App/User', 'id_user');
     }
+
+
 }

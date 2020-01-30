@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Document;
+use Illuminate\Support\Facades\DB;
 use Validator;
 class DocumentController extends Controller
 {
@@ -49,8 +50,12 @@ class DocumentController extends Controller
             return response()->json($validator->errors(),400);
         }
 
+
         $document = Document::create($request->all());
+        DB::table('users')->where('id','id_user_document')->increment('points' , 5 );
         return response()->json($document,201);
+
+
     }
 
     /**

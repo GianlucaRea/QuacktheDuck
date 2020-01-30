@@ -26,6 +26,7 @@ class CreateStatisticsTable extends Migration
         });
     }
 
+
     //DB::connection('mysql')->table('statistics')->insert([ ]};
     /**
      * Reverse the migrations.

@@ -5,10 +5,20 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Statistic;
+use Illuminate\Support\Facades\DB;
 use Validator;
 
 class StatisticController extends Controller
 {
+
+    /**
+     * average_feedback_single_doc
+     * average_feedback_total_doc
+     * number_uploaded_doc
+     * points_feedback_single_doc
+     * points_feedback_total_doc
+     * rank_position
+     */
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +26,6 @@ class StatisticController extends Controller
      */
     public function index()
     {
-
         return response()->json(Statistic::get(),200);
     }
 
@@ -36,27 +45,18 @@ class StatisticController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-
-        $validator = Validator::make($request->all());
-        if($validator->fails()){
-            return response()->json($validator->errors(),400);
-        }
-
-        $statistic = Statistic::create($request->all());
-        return response()->json($statistic,201);
-    }
+    public function store(Request $request){ }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $id_user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id_user)
     {
-        $statistic = Statistic::find($id);
+       // $id = DB::table('users')->select('id')->where('id' , '=' , $argc)->get();
+        $statistic = Statistic::find($id_user);
         if(is_null($statistic)){
             return response()->json(["message"=>'Record not found'],404);
         }
@@ -106,6 +106,7 @@ class StatisticController extends Controller
         $statistic-> delete();
         return response()->json(null,204);
     }
+
 
 
 }

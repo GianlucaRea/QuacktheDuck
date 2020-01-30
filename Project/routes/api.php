@@ -26,6 +26,8 @@ Route::apiResource('statistics','StatisticController');
 Route::apiResource('tags','TagController');
 Route::apiResource('versions','VersionController');
 
+Route::get('statistics/id','StatisticController@average_feedback_single_doc');
+
 
 
 
