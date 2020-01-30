@@ -12,4 +12,10 @@ class Version extends Model
          'id_document',
        'version_number',
      ];
+
+    public function document(){
+
+        return $this->belongsTo('App/Document','id_document');
+    }
+
 }

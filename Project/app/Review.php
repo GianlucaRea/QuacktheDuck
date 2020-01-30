@@ -19,5 +19,9 @@ class Review extends Model
 
         return $this->belongsTo('App/Document','id_document_reviewed');
     }
+    public function user(){
+
+        return $this->belongsTo('App/User','id_review_by_user');
+    }
 
 }

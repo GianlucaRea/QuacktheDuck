@@ -30,4 +30,13 @@ class Document extends Model
     public function review(){
         return $this->hasMany('App/Review','id_document_reviewed');
     }
+
+    public function version(){
+        return $this->hasMany('App/Version','id_document');
+    }
+
+    public function user(){
+
+        return $this->belongsTo('App/User','id_user_document');
+    }
 }
