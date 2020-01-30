@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\TagModel;
+use App\Tag;
 use Validator;
 
 class TagController extends Controller
@@ -16,8 +16,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tagList = TagModel::paginate(10);
-        return response()->json($tagList,200);
+        return response()->json(Tag::get(),200);
 
     }
 
@@ -48,7 +47,7 @@ class TagController extends Controller
             return response()->json($validator->errors(),400);
         }
 
-        $tag = TagModel::create($request->all());
+        $tag = Tag::create($request->all());
         return response()->json($tag,201);
     }
 
@@ -60,11 +59,11 @@ class TagController extends Controller
      */
     public function show($id)
     {
-        $tag = TagModel::find($id);
+        $tag = Tag::find($id);
         if(is_null($tag)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        return response()->json(TagModel::find($id),200);
+        return response()->json(Tag::find($id),200);
     }
 
     /**
@@ -87,7 +86,7 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $tag = TagModel::find($id);
+        $tag = Tag::find($id);
         if(is_null($tag)){
             return response()->json(["message"=>'Record not found'],404);
         }
@@ -103,7 +102,7 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        $tag = TagModel::find($id);
+        $tag = Tag::find($id);
         if(is_null($tag)){
             return response()->json(["message"=>'Record not found'],404);
         }

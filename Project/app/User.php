@@ -9,7 +9,8 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
-
+    public $timestamps = false;
+    protected $table = "users";
     /**
      * The attributes that are mass assignable.
      *

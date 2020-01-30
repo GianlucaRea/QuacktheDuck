@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\ReviewModel;
+use App\Review;
 use Validator;
 
 class ReviewController extends Controller
@@ -16,8 +16,7 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        $reviewList = ReviewModel::paginate(10);
-        return response()->json($reviewList,200);
+        return response()->json(Review::get(),200);
     }
 
     /**
@@ -49,7 +48,7 @@ class ReviewController extends Controller
             return response()->json($validator->errors(),400);
         }
 
-        $review = ReviewModel::create($request->all());
+        $review = Review::create($request->all());
         return response()->json($review,201);
     }
 
@@ -61,11 +60,11 @@ class ReviewController extends Controller
      */
     public function show($id)
     {
-        $review = ReviewModel::find($id);
+        $review = Review::find($id);
         if(is_null($review)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        return response()->json(ReviewModel::find($id),200);
+        return response()->json(Review::find($id),200);
     }
 
     /**
@@ -96,7 +95,7 @@ class ReviewController extends Controller
         if($validator->fails()){
             return response()->json($validator->errors(),400);
         }
-        $review = ReviewModel::find($id);
+        $review = Review::find($id);
         if(is_null($review)){
             return response()->json(["message"=>'Record not found'],404);
         }
@@ -112,7 +111,7 @@ class ReviewController extends Controller
      */
     public function destroy($id)
     {
-        $review = ReviewModel::find($id);
+        $review = Review::find($id);
         if(is_null($review)){
             return response()->json(["message"=>'Record not found'],404);
         }
@@ -120,10 +119,6 @@ class ReviewController extends Controller
         return response()->json(null,204);
     }
 
-     public function getReviewID(){}
 
-     public function getStarNumber(){}
-
-     public function getDataReview(){}
 
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TagModel extends Model
+class Tag extends Model
 {
     public $timestamps = false;
     protected $table = "tags";
@@ -13,4 +13,8 @@ class TagModel extends Model
         'tag_name',
     ];
 
+    public function document(){
+
+        return $this->belongsTo('App/Document','id_document');
+    }
 }

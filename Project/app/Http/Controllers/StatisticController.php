@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\StatisticModel;
+use App\Statistic;
 use Validator;
 
 class StatisticController extends Controller
@@ -16,8 +16,8 @@ class StatisticController extends Controller
      */
     public function index()
     {
-        $statisticList = StatisticModel::paginate(10);
-        return response()->json($statisticList,200);
+
+        return response()->json(Statistic::get(),200);
     }
 
     /**
@@ -44,7 +44,7 @@ class StatisticController extends Controller
             return response()->json($validator->errors(),400);
         }
 
-        $statistic = StatisticModel::create($request->all());
+        $statistic = Statistic::create($request->all());
         return response()->json($statistic,201);
     }
 
@@ -56,11 +56,11 @@ class StatisticController extends Controller
      */
     public function show($id)
     {
-        $statistic = StatisticModel::find($id);
+        $statistic = Statistic::find($id);
         if(is_null($statistic)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        return response()->json(StatisticModel::find($id),200);
+        return response()->json(Statistic::find($id),200);
     }
 
     /**
@@ -83,7 +83,7 @@ class StatisticController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $statistic = StatisticModel::find($id);
+        $statistic = Statistic::find($id);
         if(is_null($statistic)){
             return response()->json(["message"=>'Record not found'],404);
         }
@@ -99,7 +99,7 @@ class StatisticController extends Controller
      */
     public function destroy($id)
     {
-        $statistic = StatisticModel::find($id);
+        $statistic = Statistic::find($id);
         if(is_null($statistic)){
             return response()->json(["message"=>'Record not found'],404);
         }
@@ -107,16 +107,5 @@ class StatisticController extends Controller
         return response()->json(null,204);
     }
 
-    public function getSingleDockReview(){}
-
-    public function getTotalReview(){}
-
-    public function getNumberUploadedDoc(){}
-
-    public function getAvarageReviewSingleDoc(){}
-
-    public function getTotalAvarageReview(){}
-
-    public function getClassificationPosition(){}
 
 }

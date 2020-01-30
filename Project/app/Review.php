@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ReviewModel extends Model
+class Review extends Model
 {
 
    protected $table = "reviews";
@@ -14,4 +14,10 @@ class ReviewModel extends Model
        'id_document_reviewed',
        'stars_number',
    ];
+
+    public function document(){
+
+        return $this->belongsTo('App/Document','id_document_reviewed');
+    }
+
 }

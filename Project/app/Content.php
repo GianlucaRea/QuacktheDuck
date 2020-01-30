@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ContentModel extends Model
+class Content extends Model
 {
     protected $table = "contents";
     public $timestamps = false;
@@ -13,4 +13,8 @@ class ContentModel extends Model
         'type',
          'file',
     ];
+
+    public function document(){
+        return $this->belongsTo('App/Document','id_doc' );
+    }
 }

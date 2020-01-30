@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AdminModel extends Model
+class Admin extends Model
 {
     public $timestamps = false;
     protected $table = "admins";

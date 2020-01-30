@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\UtenteModel;
+use App\User;
 use Validator;
 class UtenteController extends Controller
 {
@@ -15,8 +15,8 @@ class UtenteController extends Controller
      */
     public function index()
     {
-        $utenteList = UtenteModel::paginate(10);
-        return response()->json($utenteList,200);
+
+        return response()->json(User::get(),200);
     }
 
     /**
@@ -42,7 +42,7 @@ class UtenteController extends Controller
             return response()->json($validator->errors(),400);
         }
 
-        $tag = UtenteModel::create($request->all());
+        $tag = User::create($request->all());
         return response()->json($tag,201);
     }
 
@@ -55,11 +55,11 @@ class UtenteController extends Controller
     public function show($id)
     {
         $id_user = $id ;
-        $user = UtenteModel::find($id_user);
+        $user = User::find($id_user);
         if(is_null($user)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        return response()->json(UtenteModel::find($id_user),200);
+        return response()->json(User::find($id_user),200);
     }
 
     /**
@@ -82,7 +82,7 @@ class UtenteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $utente = UtenteModel::find($id);
+        $utente = User::find($id);
         if(is_null($utente)){
             return response()->json(["message"=>'Record not found'],404);
         }
@@ -98,44 +98,12 @@ class UtenteController extends Controller
      */
     public function destroy($id)
     {
-        $utente = UtenteModel::find($id);
+        $utente = User::find($id);
         if(is_null($utente)){
             return response()->json(["message"=>'Record not found'],404);
         }
         $utente-> delete();
         return response()->json(null,204);
     }
-
-     public function getID(){}
-
-     public function getName(){}
-
-     public function getSurname(){}
-
-     public function getEmail(){}
-
-     public function getUniversity(){}
-
-     public function getCourse(){}
-
-     public function getAvailablePoints(){}
-
-     public function buyDoc(){}
-
-     public function viewDoc(){}
-
-     public function searchDoc(){}
-
-     public function feedDoc(){}
-
-     public function setPrefDoc(){}
-
-     public function delPrefDoc(){}
-
-     public function setNotifyDoc(){}
-
-     public function delNotifyDoc(){}
-
-     public function reportDoc(){}
 
 }

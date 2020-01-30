@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\VersionModel;
+use App\Version;
 use Validator;
 
 class VersionController extends Controller
@@ -16,8 +16,8 @@ class VersionController extends Controller
      */
     public function index()
     {
-        $versionList = VersionModel::paginate(10);
-        return response()->json($versionList,200);
+
+        return response()->json(Version::get(),200);
 
     }
 
@@ -48,7 +48,7 @@ class VersionController extends Controller
             return response()->json($validator->errors(),400);
         }
 
-        $version = VersionModel::create($request->all());
+        $version = Version::create($request->all());
         return response()->json($version,201);
     }
 
@@ -60,11 +60,11 @@ class VersionController extends Controller
      */
     public function show($id)
     {
-        $version = VersionModel::find($id);
+        $version = Version::find($id);
         if(is_null($version)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        return response()->json(VersionModel::find($id),200);
+        return response()->json(Version::find($id),200);
     }
 
     /**
@@ -87,7 +87,7 @@ class VersionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $version = VersionModel::find($id);
+        $version = Version::find($id);
         if(is_null($version)){
             return response()->json(["message"=>'Record not found'],404);
         }
@@ -103,7 +103,7 @@ class VersionController extends Controller
      */
     public function destroy($id)
     {
-        $version = VersionModel::find($id);
+        $version = Version::find($id);
         if(is_null($version)){
             return response()->json(["message"=>'Record not found'],404);
         }

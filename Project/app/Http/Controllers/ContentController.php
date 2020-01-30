@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\ContentModel;
+use App\Content;
 use Validator;
 
 class ContentController extends Controller
@@ -16,8 +16,7 @@ class ContentController extends Controller
      */
     public function index()
     {
-        $contentList = ContentModel::paginate(10);
-        return response()->json($contentList,200);
+        return response()->json(Content::get(),200);
         //return response()->download(public_path('duckbath.jpg'),user image
     }
 
@@ -49,7 +48,7 @@ class ContentController extends Controller
             return response()->json($validator->errors(),400);
         }
 
-        $country = ContentModel::create($request->all());
+        $country = Content::create($request->all());
         return response()->json($country,201);
     }
 
@@ -61,11 +60,11 @@ class ContentController extends Controller
      */
     public function show($id)
     {
-        $content = ContentModel::find($id);
+        $content = Content::find($id);
         if(is_null($content)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        return response()->json(ContentModel::find($id),200);
+        return response()->json(Content::find($id),200);
     }
 
     /**
@@ -88,7 +87,7 @@ class ContentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $content = ContentModel::find($id);
+        $content = Content::find($id);
         if(is_null($content)){
             return response()->json(["message"=>'Record not found'],404);
         }
@@ -104,7 +103,7 @@ class ContentController extends Controller
      */
     public function destroy($id)
     {
-        $content = ContentModel::find($id);
+        $content = Content::find($id);
         if(is_null($content)){
             return response()->json(["message"=>'Record not found'],404);
         }
@@ -112,4 +111,3 @@ class ContentController extends Controller
         return response()->json(null,204);
     }
 }
-

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Validator;
 use App\Http\Controllers\Controller;
-use App\Models\AdminModel;
+use App\Admin;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -16,8 +16,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $adminList = AdminModel::paginate(10);
-        return response()->json($adminList, 200);
+        return response()->json(Admin::get(),200);
     }
 
     /**
@@ -49,7 +48,7 @@ class AdminController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
-        $country = AdminModel::create($request->all());
+        $country = Admin::create($request->all());
         return response()->json($country, 201);
     }
 
@@ -62,11 +61,11 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        $admin = AdminModel::find($id);
+        $admin = Admin::find($id);
         if (is_null($admin)) {
             return response()->json(["message" => 'Record not found'], 404);
         }
-        return response()->json(AdminModel::find($id), 200);
+        return response()->json(Admin::find($id), 200);
     }
 
     /**
@@ -89,7 +88,7 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $admin = AdminModel::find($id);
+        $admin = Admin::find($id);
         if (is_null($admin)) {
             return response()->json(["message" => 'Record not found'], 404);
         }
@@ -105,7 +104,7 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        $admin = AdminModel::find($id);
+        $admin = Admin::find($id);
         if (is_null($admin)) {
             return response()->json(["message" => 'Record not found'], 404);
         }
@@ -113,17 +112,7 @@ class AdminController extends Controller
         return response()->json(null, 204);
     }
 
-    public function getApprovateDoc($document_id){}
 
-    public function getDeleteDoc($document_id){}
-
-    public function getID(){}
-
-    public function getName(){}
-
-    public function getSurname(){}
-
-    public function getEmail(){}
 
 
 

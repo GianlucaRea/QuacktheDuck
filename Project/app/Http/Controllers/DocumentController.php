@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\DocumentModel;
+use App\Document;
 use Validator;
 class DocumentController extends Controller
 {
@@ -15,8 +15,7 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        $documentList = DocumentModel::paginate(10);
-        return response()->json($documentList,200);
+        return response()->json(Document::get(),200);
     }
 
     /**
@@ -50,7 +49,7 @@ class DocumentController extends Controller
             return response()->json($validator->errors(),400);
         }
 
-        $document = DocumentModel::create($request->all());
+        $document = Document::create($request->all());
         return response()->json($document,201);
     }
 
@@ -62,11 +61,11 @@ class DocumentController extends Controller
      */
     public function show($id)
     {
-        $document = DocumentModel::find($id);
+        $document = Document::find($id);
         if(is_null($document)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        return response()->json(DocumentModel::find($id),200);
+        return response()->json(Document::find($id),200);
     }
 
     /**
@@ -89,7 +88,7 @@ class DocumentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $document = DocumentModel::find($id);
+        $document = Document::find($id);
         if(is_null($document)){
             return response()->json(["message"=>'Record not found'],404);
         }
@@ -105,7 +104,7 @@ class DocumentController extends Controller
      */
     public function destroy($id)
     {
-        $document = DocumentModel::find($id);
+        $document = Document::find($id);
         if(is_null($document)){
             return response()->json(["message"=>'Record not found'],404);
         }
@@ -114,21 +113,4 @@ class DocumentController extends Controller
     }
 
 
-    public function getDocID(){}
-
-    public function getTitle(){}
-
-    public function getData(){}
-
-    public function getSource(){}
-
-    public function getUniversity(){}
-
-    public function getCourse(){}
-
-    public function getSubject(){}
-
-    public function getVersion(){}
-
-    public function getNumberOfReporting(){}
 }

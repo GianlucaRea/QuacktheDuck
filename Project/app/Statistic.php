@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class StatisticModel extends Model
+class Statistic extends Model
 {
     public $timestamps = false;
     protected $table = "statistics";
