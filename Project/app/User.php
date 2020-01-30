@@ -45,4 +45,10 @@ class User extends Authenticatable
     public function review(){
         return $this->hasMany('App/Review','id_review_by_user');
     }
+
+    public function statistic(){
+
+        return $this->belongsTo('App/Statistic','id');
+    }
+
 }

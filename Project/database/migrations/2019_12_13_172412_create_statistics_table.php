@@ -14,8 +14,9 @@ class CreateStatisticsTable extends Migration
     public function up()
     {
         Schema::create('statistics', function (Blueprint $table) {
-            $table->unsignedBigInteger('id');
-            $table->foreign('id') ->references('id')->on('users');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user') ->references('id_user')->on('users');
             $table->integer('average_feedback_single_doc');
             $table->integer('average_feedback_total_doc');
             $table->integer('number_uploaded_doc');
