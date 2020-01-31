@@ -106,4 +106,22 @@ class UtenteController extends Controller
         return response()->json(null,204);
     }
 
+    public function getDoc($id){
+        $user = User::find($id)->document()->get();
+
+        return response()->json($user,200);
+    }
+
+    public function getReviews($id){
+        $user = User::find($id)->review()->get();
+
+        return response()->json($user,200);
+    }
+
+    public function getStatistic($id){
+        $user = User::find($id)->statistic()->get();
+
+        return response()->json($user,200);
+    }
+
 }

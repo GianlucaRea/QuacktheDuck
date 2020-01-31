@@ -15,7 +15,7 @@ class Statistic extends Model
 
     public function user()
     {
-        return $this->hasMany('App/User', 'id_user');
+        return $this->hasMany('App\User', 'id_user');
     }
 
 

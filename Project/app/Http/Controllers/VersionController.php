@@ -110,4 +110,10 @@ class VersionController extends Controller
         $version-> delete();
         return response()->json(null,204);
     }
+
+    public function getDocument($id){
+        $doc = Version::find($id)->document()->get();
+
+        return response()->json($doc, 200);
+    }
 }

@@ -109,4 +109,12 @@ class TagController extends Controller
         $tag-> delete();
         return response()->json(null,204);
     }
+
+    public function getDocument($id)
+    {
+        $tag = Tag::find($id)->document()->get();
+
+        return response()->json($tag, 200);
+    }
+
 }

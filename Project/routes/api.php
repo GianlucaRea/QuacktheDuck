@@ -27,6 +27,21 @@ Route::apiResource('tags','TagController');
 Route::apiResource('versions','VersionController');
 
 Route::get('statistics/id','StatisticController@average_feedback_single_doc');
+Route::get('users/docs/{id}','UtenteController@getDoc');
+Route::get('users/reviews/{id}','UtenteController@getReviews');
+Route::get('users/statistic/{id}','UtenteController@getStatistic');
+Route::get('documents/content/{id}','DocumentController@getContent');
+Route::get('documents/tags/{id}','DocumentController@getTags');
+Route::get('documents/reviews/{id}','DocumentController@getReviews');
+Route::get('documents/versions/{id}','DocumentController@getVersions');
+Route::get('documents/user/{id}','DocumentController@getUser');
+Route::get('contents/document/{id}','ContentController@getDocument');
+Route::get('reviews/user/{id}','ReviewController@getUser');
+Route::get('reviews/document/{id}','ReviewController@getDocument');
+Route::get('statistics/user/{id}','StatisticsController@getUser');
+Route::get('tags/document/{id}','TagController@getDocument');
+Route::get('versions/document/{id}','VersionController@getDocument');
+
 
 
 

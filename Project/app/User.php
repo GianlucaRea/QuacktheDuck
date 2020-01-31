@@ -5,7 +5,8 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use Illuminate\Database\Eloquent;
+use App\Document;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -39,16 +40,15 @@ class User extends Authenticatable
     ];
 
     public function document(){
-        return $this->hasMany('App/Document','id_user_document');
+        return $this->hasMany('App\Document','id_user_document');
     }
 
     public function review(){
-        return $this->hasMany('App/Review','id_review_by_user');
+        return $this->hasMany('App\Review','id_review_by_user');
     }
 
     public function statistic(){
-
-        return $this->belongsTo('App/Statistic','id');
+        return $this->belongsTo('App\Statistic','id');
     }
 
 }

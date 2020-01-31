@@ -15,6 +15,6 @@ class Content extends Model
     ];
 
     public function document(){
-        return $this->belongsTo('App/Document','id_doc' );
+        return $this->belongsTo('App\Document','id_doc' );
     }
 }

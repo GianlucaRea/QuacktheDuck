@@ -107,6 +107,11 @@ class StatisticController extends Controller
         return response()->json(null,204);
     }
 
+    public function getUser($id)
+    {
+        $doc = Statistic::find($id)->user()->get();
 
+        return response()->json($doc, 200);
+    }
 
 }

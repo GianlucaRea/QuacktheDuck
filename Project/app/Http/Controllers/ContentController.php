@@ -110,4 +110,12 @@ class ContentController extends Controller
         $content-> delete();
         return response()->json(null,204);
     }
+
+    public function getDocument($id)
+    {
+        $doc = Content::find($id)->document()->get();
+
+        return response()->json($doc, 200);
+    }
+
 }

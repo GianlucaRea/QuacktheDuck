@@ -107,6 +107,8 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
     public function destroy($id)
     {
         $document = Document::find($id);
@@ -117,5 +119,37 @@ class DocumentController extends Controller
         return response()->json(null,204);
     }
 
+    public function getUser($id){
+        $doc = Document::find($id)->user()->get();
 
+        return response()->json($doc, 200);
+    }
+
+    public function getContent($id)
+    {
+        $doc = Document::find($id)->content()->get();
+
+        return response()->json($doc, 200);
+    }
+
+    public function getTags($id)
+    {
+        $doc = Document::find($id)->tag()->get();
+
+        return response()->json($doc, 200);
+    }
+
+    public function getReviews($id)
+    {
+        $doc = Document::find($id)->review()->get();
+
+        return response()->json($doc, 200);
+    }
+
+    public function  getVersions($id){
+
+        $doc = Document::find($id)->version()->get();
+
+        return response()->json($doc, 200);
+    }
 }
