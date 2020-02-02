@@ -22,6 +22,7 @@ class CreateDocumentsTable extends Migration
             $table->String('university');
             $table->String('course');
             $table->String('subject');
+            $table->integer('value')->default('10');
             $table->String('source')->nullable();
 
 

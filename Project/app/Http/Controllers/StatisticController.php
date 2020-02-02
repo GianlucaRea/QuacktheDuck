@@ -60,7 +60,7 @@ class StatisticController extends Controller
         if(is_null($statistic)){
             return response()->json(["message"=>'Record not found'],404);
         }
-        return response()->json(Statistic::find($id),200);
+        return response()->json(Statistic::find($statistic),200);
     }
 
     /**

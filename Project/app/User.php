@@ -51,4 +51,8 @@ class User extends Authenticatable
         return $this->belongsTo('App\Statistic','id');
     }
 
+    public function getUniversity(){
+        return $this->university;
+    }
+
 }

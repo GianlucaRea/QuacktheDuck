@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Document;
 use App\Http\Controllers\Controller;
+use App\Statistic;
 use Illuminate\Http\Request;
 use App\User;
 use Validator;
@@ -41,6 +43,7 @@ class UtenteController extends Controller
         if($validator->fails()){
             return response()->json($validator->errors(),400);
         }
+
 
         $tag = User::create($request->all());
         return response()->json($tag,201);
@@ -123,5 +126,13 @@ class UtenteController extends Controller
 
         return response()->json($user,200);
     }
+
+    public function SearchDocByUniversity($id){
+        $university = User::find($id)->getUniversity();
+        $documents = Document::where('university',$university)->get();
+        return response()->json($documents,200);
+    }
+
+    
 
 }
