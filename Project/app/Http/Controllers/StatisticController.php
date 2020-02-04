@@ -11,14 +11,7 @@ use Validator;
 class StatisticController extends Controller
 {
 
-    /**
-     * average_feedback_single_doc
-     * average_feedback_total_doc
-     * number_uploaded_doc
-     * points_feedback_single_doc
-     * points_feedback_total_doc
-     * rank_position
-     */
+
     /**
      * Display a listing of the resource.
      *
@@ -36,7 +29,7 @@ class StatisticController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -45,7 +38,20 @@ class StatisticController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){ }
+    public function store(Request $request){
+        $rules=[
+            'id_user' => 'required',
+        ];
+
+        $validator = Validator::make($request->all(),$rules);
+        if($validator->fails()){
+            return response()->json($validator->errors(),400);
+        }
+
+        $statistic = Statistic::create($request->all());
+        //DB::table('statistics')->insert(['number_uploaded_doc'=> 10])where('id_user',$request);
+        return response()->json($statistic,201);
+    }
 
     /**
      * Display the specified resource.
@@ -55,7 +61,6 @@ class StatisticController extends Controller
      */
     public function show($id_user)
     {
-       // $id = DB::table('users')->select('id')->where('id' , '=' , $argc)->get();
         $statistic = Statistic::find($id_user);
         if(is_null($statistic)){
             return response()->json(["message"=>'Record not found'],404);

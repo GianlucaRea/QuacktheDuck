@@ -55,4 +55,8 @@ class User extends Authenticatable
         return $this->university;
     }
 
+    public function getID(){
+        return $this->id;
+    }
+
 }

@@ -17,12 +17,12 @@ class CreateStatisticsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user') ->references('id')->on('users');
-            $table->integer('average_feedback_single_doc');
-            $table->integer('average_feedback_total_doc');
-            $table->integer('number_uploaded_doc');
+            $table->integer('average_feedback_single_doc')->default(0);
+            $table->integer('average_feedback_total_doc')->default(0);
+            $table->integer('number_uploaded_doc')->default(0);
             $table->integer('points_feedback_single_doc')->default(0);
-            $table->integer('points_feedback_total_doc');
-            $table->integer('rank_position');
+            $table->integer('points_feedback_total_doc') ->default(0);
+            $table->integer('rank_position')->default(0);
         });
     }
 
