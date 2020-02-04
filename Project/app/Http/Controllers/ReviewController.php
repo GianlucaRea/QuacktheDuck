@@ -51,10 +51,6 @@ class ReviewController extends Controller
 
 
         $review = Review::create($request->all());
-
-     //   $user_uploader = DB::table('documents')->select('id_user_document')->where('id','id_document_reviewed');
-        //  DB::table('users')->where('id',$user_uploader)->increment('points',1);
-
         return response()->json($review,201);
     }
 

@@ -49,7 +49,6 @@ class StatisticController extends Controller
         }
 
         $statistic = Statistic::create($request->all());
-        //DB::table('statistics')->insert(['number_uploaded_doc'=> 10])where('id_user',$request);
         return response()->json($statistic,201);
     }
 
@@ -118,5 +117,6 @@ class StatisticController extends Controller
 
         return response()->json($doc, 200);
     }
+
 
 }

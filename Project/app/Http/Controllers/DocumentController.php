@@ -53,6 +53,7 @@ class DocumentController extends Controller
 
         $document = Document::create($request->all());
         DB::table('users')->where('id','id_user_document')->increment('points' , 5 );
+
         return response()->json($document,201);
 
 
