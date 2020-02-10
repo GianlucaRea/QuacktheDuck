@@ -38,10 +38,11 @@ Route::get('documents/user/{id}','DocumentController@getUser');
 Route::get('contents/document/{id}','ContentController@getDocument');
 Route::get('reviews/user/{id}','ReviewController@getUser');
 Route::get('reviews/document/{id}','ReviewController@getDocument');
-Route::get('statistics/user/{id}','StatisticsController@getUser');
+Route::get('statistics/user/{id}','StatisticController@getUser');
 Route::get('tags/document/{id}','TagController@getDocument');
 Route::get('versions/document/{id}','VersionController@getDocument');
 Route::get('users/documents/university/{id}','UtenteController@SearchDocByUniversity');
+Route::get('statistics/avgtest/{id}','StatisticController@getAvgFeedbackDoc');
 
 
 

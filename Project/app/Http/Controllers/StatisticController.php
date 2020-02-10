@@ -118,5 +118,19 @@ class StatisticController extends Controller
         return response()->json($doc, 200);
     }
 
+    public function getAvgFeedbackDoc($id){
+
+        //select  from review_table inner join document on document.id = review_table.document_id and document.user_id = $id;
+        $average = DB::select( DB::raw("select avg(stars_number) as average from reviews inner join documents on documents.id = reviews.id_document_reviewed and documents.id_user_document = $id"));
+
+
+        $stat = Statistic::where('id_user', $id)->first();
+        $stat -> average_feedback_total_doc = $average[0]->average;
+        $stat -> save();
+        return $stat;
+
+
+    }
+
 
 }

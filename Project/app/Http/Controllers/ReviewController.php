@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Document;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Review;
@@ -42,7 +43,7 @@ class ReviewController extends Controller
         $rules = [
             'id_review_by_user'=>'required',
              'id_document_reviewed'=>'required',
-            'stars_number'=> 'required|integer|min:1|max:5',
+            'stars_number'=> 'required|integer|min:1|max:5'
         ];
         $validator = Validator::make($request->all(),$rules);
         if($validator->fails()){

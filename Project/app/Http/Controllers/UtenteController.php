@@ -45,8 +45,10 @@ class UtenteController extends Controller
         }
 
 
-        $tag = User::create($request->all());
-        return response()->json($tag,201);
+        $user = User::create($request->all());
+        $id = $user->id;
+        Statistic::create(['id_user'=>$id]);
+        return response()->json($user,201);
     }
 
     /**
@@ -133,6 +135,6 @@ class UtenteController extends Controller
         return response()->json($documents,200);
     }
 
-    
+
 
 }
