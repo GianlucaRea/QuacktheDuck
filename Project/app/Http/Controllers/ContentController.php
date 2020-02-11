@@ -17,7 +17,7 @@ class ContentController extends Controller
     public function index()
     {
         return response()->json(Content::get(),200);
-        //return response()->download(public_path('duckbath.jpg'),user image
+
     }
 
     /**
