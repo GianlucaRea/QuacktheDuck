@@ -124,11 +124,30 @@ class StatisticController extends Controller
         $average = DB::select( DB::raw("select avg(stars_number) as average from reviews inner join documents on documents.id = reviews.id_document_reviewed and documents.id_user_document = $id"));
 
 
-        $stat = Statistic::where('id_user', $id)->first();
+        $stat = Statistic::where('id_user',$id)->first();
         $stat -> average_feedback_total_doc = $average[0]->average;
         $stat -> save();
         return $stat;
 
+
+    }
+
+
+    public function getNumberUploadedDoc($id){
+        $number = DB::select( DB::raw("select count(id) as number_uploaded_doc from documents where id_user_document = $id"));
+        $stat = Statistic::where('id_user',$id)->first();
+        $stat -> number_uploaded_doc = $number[0]->number_uploaded_doc;
+        $stat -> save();
+        return $stat;
+    }
+
+    public function getPointsFeedbackTotalDoc($id){
+        $points = DB::select( DB::raw("select sum(stars_number) as points from reviews inner join documents on documents.id = reviews.id_document_reviewed and documents.id_user_document = $id"));
+
+        $stat = Statistic::where('id_user',$id)->first();
+        $stat -> points_feedback_total_doc = $points[0]->points;
+        $stat -> save();
+        return $stat;
 
     }
 
