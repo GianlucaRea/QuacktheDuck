@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
+
 @section('content')
-    <document-component>
+    <review-component>
 
-    </document-component>
+    </review-component>
 @endsection
-
-
