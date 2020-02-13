@@ -42,7 +42,7 @@ Route::get('statistics/user/{id}','StatisticController@getUser');
 Route::get('tags/document/{id}','TagController@getDocument');
 Route::get('versions/document/{id}','VersionController@getDocument');
 Route::get('users/documents/university/{id}','UtenteController@SearchDocByUniversity');
-Route::get('statistics/avgtest/{id}','StatisticController@getAvgFeedbackDoc');
+Route::get('statistics/avg/{id}','StatisticController@getAvgFeedbackDoc');
 Route::get('statistics/nupload/{id}','StatisticController@getNumberUploadedDoc');
 Route::get('statistics/pointsdoc/{id}','StatisticController@getPointsFeedbackTotalDoc');
 
