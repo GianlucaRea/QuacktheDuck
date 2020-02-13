@@ -25,6 +25,7 @@ Api documentation can be found at [this](https://documenter.getpostman.com/view/
 ### Demo
 
 Here are some small demo video of the prototype of this Project.
+A better quality of the videos shown below is in the Doc Folder.
 
 #### Upload of a Document with points earned by the uploader:
 
