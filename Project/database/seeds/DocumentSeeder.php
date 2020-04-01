@@ -11,6 +11,6 @@ class DocumentSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Document::class, 20000)->create();
+        factory(App\Document::class, 500)->create();
     }
 }
